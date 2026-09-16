@@ -1,0 +1,26 @@
+<section class="seccion metodo">
+  <div class="contenedor metodo__rejilla">
+    <div class="metodo__cabecera" appRevelar>
+      <p class="kicker">Sin cajas negras</p>
+      <h2>Sabes qué vamos a hacer, cuándo y para qué.</h2>
+      <p class="seccion__entrada">
+        Un buen proyecto no empieza enseñando una pantalla. Empieza entendiendo qué está fallando hoy y qué
+        tendría que cambiar mañana.
+      </p>
+      <p class="metodo__nota">Antes de empezar tendrás un alcance claro, un calendario realista y responsabilidades por escrito.</p>
+      <a class="enlace-flecha" routerLink="/proceso">Conoce nuestro proceso</a>
+    </div>
+
+    <ol class="metodo__pasos">
+      @for (paso of pasos; track paso.numero; let indice = $index) {
+        <li class="paso" [appRevelar]="indice * 90" appTarjetaInteractiva>
+          <span class="paso__numero" aria-hidden="true">{{ paso.numero }}</span>
+          <div class="paso__cuerpo">
+            <h3 class="paso__titulo">{{ paso.titulo }}</h3>
+            <p class="paso__resumen">{{ paso.resumen }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

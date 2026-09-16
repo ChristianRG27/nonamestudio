@@ -1,0 +1,44 @@
+<div class="directo">
+  <p class="directo__titulo">{{ texto() }}</p>
+
+  <ul class="directo__lista">
+    @if (disponible(telefono)) {
+      <li>
+        <a class="enlace-flecha" [href]="enlaceTelefono" data-evento="phone_click">{{ telefono }}</a>
+      </li>
+    }
+    @if (disponible(whatsapp)) {
+      <li>
+        <a
+          class="enlace-flecha"
+          [href]="enlaceWhatsapp"
+          rel="noopener noreferrer"
+          target="_blank"
+          data-evento="whatsapp_click"
+        >
+          Escribir por WhatsApp
+        </a>
+      </li>
+    }
+    @if (disponible(email)) {
+      <li>
+        <a class="enlace-flecha" [href]="'mailto:' + email">{{ email }}</a>
+      </li>
+    }
+    @if (bookingUrl) {
+      <li>
+        <a class="enlace-flecha" [href]="bookingUrl" rel="noopener noreferrer" target="_blank" data-evento="meeting_book">
+          Reservar una reunión
+        </a>
+      </li>
+    }
+  </ul>
+
+  @if (!disponible(telefono) && !disponible(whatsapp) && !disponible(email)) {
+    <p class="directo__pendiente">WhatsApp, teléfono y email: {{ telefono }}</p>
+  }
+
+  @if (disponible(horario)) {
+    <p class="directo__horario">{{ horario }}</p>
+  }
+</div>

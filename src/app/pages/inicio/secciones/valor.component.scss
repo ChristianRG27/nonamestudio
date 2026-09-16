@@ -1,0 +1,91 @@
+.valor__rejilla {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+
+  @media (min-width: 64em) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+}
+
+.valor__cabecera {
+  display: grid;
+  gap: 1rem;
+  max-width: 34rem;
+}
+
+.valor__pilares {
+  display: grid;
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: pilar;
+}
+
+.pilar {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+.pilar:not(:last-child)::before {
+  position: absolute;
+  top: 3rem;
+  bottom: -2.25rem;
+  left: 1.3125rem;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--acento), rgb(184 58 12 / 0.15));
+  content: '';
+}
+
+.pilar__numero {
+  display: grid;
+  width: 2.625rem;
+  height: 2.625rem;
+  place-items: center;
+  border: 1px solid var(--acento);
+  border-radius: 50%;
+  background: var(--papel);
+  color: var(--acento);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.pilar:hover .pilar__numero {
+  background: var(--acento);
+  color: var(--papel-0);
+  box-shadow: 0 0 0 6px rgb(184 58 12 / 0.1);
+  transform: scale(1.08);
+}
+
+/* La línea de conexión se dibuja al revelarse cada pilar. */
+
+html.con-revelado .pilar.revelar:not(:last-child)::before {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+html.con-revelado .pilar.revelar.revelado:not(:last-child)::before {
+  transform: scaleY(1);
+  transition: transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--revelar-retardo, 0ms) + 240ms);
+}
+
+.pilar__contenido {
+  display: grid;
+  gap: 0.375rem;
+  padding-top: 0.375rem;
+}
+
+.pilar__titulo {
+  font-size: var(--paso-2);
+}
+
+.pilar__texto {
+  max-width: 44ch;
+  color: var(--tinta-700);
+}

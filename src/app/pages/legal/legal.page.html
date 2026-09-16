@@ -1,0 +1,42 @@
+<section class="pagina">
+  <div class="contenedor contenedor--estrecho">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">{{ documento.titulo }}</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <h1>{{ documento.titulo }}</h1>
+    </header>
+
+    <p class="prosa--aviso">{{ notaBorrador }}</p>
+
+    <div class="prosa">
+      @for (bloque of documento.bloques; track bloque.titulo) {
+        <section class="legal__bloque">
+          <h2>{{ bloque.titulo }}</h2>
+          @for (parrafo of bloque.parrafos; track $index) {
+            <p>{{ parrafo }}</p>
+          }
+          @if (bloque.lista) {
+            <ul>
+              @for (elemento of bloque.lista; track elemento) {
+                <li>{{ elemento }}</li>
+              }
+            </ul>
+          }
+        </section>
+      }
+
+      @if (esCookies) {
+        <p class="legal__reiniciar">
+          <button class="boton boton--secundario" type="button" (click)="reiniciarConsentimiento()">
+            Volver a decidir sobre la analítica
+          </button>
+        </p>
+      }
+    </div>
+  </div>
+</section>

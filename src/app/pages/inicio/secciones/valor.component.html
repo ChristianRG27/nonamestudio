@@ -1,0 +1,25 @@
+<section class="seccion valor">
+  <div class="contenedor valor__rejilla">
+    <div class="valor__cabecera" appRevelar>
+      <p class="kicker">El problema no es solo la web</p>
+      <h2>Si tu negocio crece, tus herramientas tienen que acompañarlo.</h2>
+      <p class="seccion__entrada">
+        Una web bonita no basta si los mensajes se quedan sin responder, las reservas llegan por cinco
+        sitios o el equipo pierde tiempo buscando información. Diseñamos todo el recorrido: desde la
+        primera visita hasta el siguiente paso de tu equipo.
+      </p>
+    </div>
+
+    <ol class="valor__pilares">
+      @for (pilar of pilares; track pilar.numero; let indice = $index) {
+        <li class="pilar con-brillo" [appRevelar]="indice * 110" appTarjetaInteractiva>
+          <span class="pilar__numero" aria-hidden="true">{{ pilar.numero }}</span>
+          <div class="pilar__contenido">
+            <h3 class="pilar__titulo">{{ pilar.titulo }}</h3>
+            <p class="pilar__texto">{{ pilar.texto }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

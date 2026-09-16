@@ -1,0 +1,74 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li><a class="migas__enlace" routerLink="/servicios">Servicios</a></li>
+        <li aria-current="page">{{ servicio?.nombre ?? 'Servicio no encontrado' }}</li>
+      </ol>
+    </nav>
+
+    @if (servicio; as s) {
+      <header class="pagina__cabecera">
+        <p class="kicker">Servicio</p>
+        <h1>{{ s.h1 }}</h1>
+        @for (parrafo of s.intro; track $index) {
+          <p class="pagina__entrada">{{ parrafo }}</p>
+        }
+        <div class="pagina__acciones">
+          <a class="boton boton--primario" routerLink="/contacto">{{ s.cta }}</a>
+          <a class="boton boton--secundario" routerLink="/proceso">Conoce nuestro proceso</a>
+        </div>
+      </header>
+
+      <div class="detalle__rejilla">
+        <div class="detalle__bloque">
+          <h2 class="detalle__titulo">Qué incluye</h2>
+          <ul class="detalle__lista">
+            @for (elemento of s.incluye; track elemento) {
+              <li>{{ elemento }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="detalle__bloque">
+          <h2 class="detalle__titulo">Para quién es</h2>
+          <ul class="detalle__lista">
+            @for (elemento of s.paraQuien; track elemento) {
+              <li>{{ elemento }}</li>
+            }
+          </ul>
+
+          <h2 class="detalle__titulo detalle__titulo--separado">Cómo lo enfocamos</h2>
+          <ol class="detalle__pasos">
+            @for (paso of s.enfoque; track paso) {
+              <li>{{ paso }}</li>
+            }
+          </ol>
+        </div>
+      </div>
+
+      <aside class="detalle__otros">
+        <h2 class="detalle__titulo">Otros servicios</h2>
+        <ul class="detalle__otros-lista">
+          @for (otro of otros; track otro.slug) {
+            <li>
+              <a class="enlace-flecha" [routerLink]="['/servicios', otro.slug]">Ver {{ otro.enlace }}</a>
+            </li>
+          }
+        </ul>
+      </aside>
+    } @else {
+      <header class="pagina__cabecera">
+        <h1>Ese servicio no existe</h1>
+        <p class="pagina__entrada">
+          Puede que el enlace esté mal escrito o que el servicio haya cambiado de nombre. Puedes ver todos los
+          servicios disponibles.
+        </p>
+        <div class="pagina__acciones">
+          <a class="boton boton--primario" routerLink="/servicios">Ver todos los servicios</a>
+        </div>
+      </header>
+    }
+  </div>
+</section>

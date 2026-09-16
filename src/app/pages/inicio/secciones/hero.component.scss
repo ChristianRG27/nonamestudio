@@ -1,0 +1,298 @@
+.hero {
+  position: sticky;
+  top: 0;
+  display: flex;
+  min-height: 100svh;
+  margin-top: calc(-1 * var(--altura-cabecera));
+  background: var(--noche-950);
+  color: var(--papel);
+  transform: translateY(var(--desplazamiento-hero, 0));
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Fondo: póster como LCP y vídeo ambiental como mejora progresiva
+   ========================================================================== */
+
+.hero__fondo {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__medio {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+}
+
+.hero__video {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.hero__video--visible {
+  opacity: 1;
+}
+
+.hero__velo {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(5 7 12 / 0.88) 0%, rgb(5 7 12 / 0.62) 46%, rgb(5 7 12 / 0.22) 100%),
+    linear-gradient(180deg, rgb(5 7 12 / 0.72) 0%, rgb(5 7 12 / 0.28) 42%, rgb(5 7 12 / 0.86) 100%);
+}
+
+/* ==========================================================================
+   Contenido: izquierda en escritorio, centrado en móvil
+   ========================================================================== */
+
+.hero__lienzo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--altura-cabecera) + clamp(1.5rem, 5svh, 4rem));
+  padding-bottom: clamp(2rem, 6svh, 5rem);
+}
+
+.hero__contenido {
+  display: grid;
+  gap: clamp(0.875rem, 1.6svh, 1.25rem);
+  width: min(100%, 58.5rem);
+}
+
+.hero__etiqueta {
+  color: var(--acento-suave);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero__titulo {
+  --tam-titulo: clamp(2.5rem, 1.4rem + 5vw, 5rem);
+  width: 100%;
+  font-size: var(--tam-titulo);
+  line-height: 1.02;
+  text-wrap: balance;
+  container-type: inline-size;
+}
+
+/* Máquina de escribir: «Necesita más …» */
+
+.hero__necesita {
+  display: block;
+  min-height: 1.08em;
+  margin-top: 0.12em;
+  font-size: min(var(--tam-titulo), 8.6cqi);
+  white-space: nowrap;
+}
+
+/* La palabra se reserva con la medida de la más larga («claridad»): así el
+   titular no cambia de líneas mientras se escribe. */
+
+.hero__palabra-caja {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__palabra-medida {
+  visibility: hidden;
+}
+
+.hero__palabra-capa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+}
+
+.hero__palabra {
+  color: var(--acento-suave);
+}
+
+.hero__punto {
+  color: var(--acento-suave);
+}
+
+.hero__palabra:empty + .hero__punto {
+  visibility: hidden;
+}
+
+.hero__cursor {
+  display: inline-block;
+  width: 0.055em;
+  min-width: 2px;
+  height: 0.82em;
+  margin-left: 0.06em;
+  background: var(--acento-suave);
+  vertical-align: -0.06em;
+  animation: hero-parpadeo 1.05s steps(1) infinite;
+}
+
+@keyframes hero-parpadeo {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Indicador de scroll, abajo a la derecha */
+
+.hero__desliza {
+  position: absolute;
+  right: 0;
+  bottom: clamp(1.5rem, 4vw, 2.75rem);
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: rgb(247 244 239 / 0.62);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  animation: hero-entrar 620ms cubic-bezier(0.22, 0.61, 0.36, 1) 560ms both;
+}
+
+.hero__desliza-flecha {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  animation: hero-desliza 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-desliza {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+  }
+
+  50% {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+}
+
+.hero__entrada {
+  max-width: 46ch;
+  color: rgb(247 244 239 / 0.84);
+  font-size: var(--paso-1);
+}
+
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+}
+
+.hero__linea {
+  margin-top: 0.375rem;
+  color: rgb(247 244 239 / 0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Entrada escalonada: navegación primero, después etiqueta, titular, texto y CTAs */
+
+.hero__etiqueta,
+.hero__titulo,
+.hero__entrada,
+.hero__acciones,
+.hero__linea {
+  animation: hero-entrar 620ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.hero__etiqueta {
+  animation-delay: 80ms;
+}
+
+.hero__titulo {
+  animation-delay: 170ms;
+}
+
+.hero__entrada {
+  animation-delay: 280ms;
+}
+
+.hero__acciones {
+  animation-delay: 380ms;
+}
+
+.hero__linea {
+  animation-delay: 470ms;
+}
+
+@keyframes hero-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Móvil
+   ========================================================================== */
+
+@media (max-width: 47.99em) {
+  .hero__lienzo {
+    justify-content: center;
+    padding-bottom: clamp(4rem, 14vw, 6rem);
+  }
+
+  .hero__contenido {
+    justify-items: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero__acciones {
+    justify-content: center;
+  }
+
+  .hero__medio {
+    object-position: 76% 38%;
+  }
+
+  .hero__velo {
+    background:
+      linear-gradient(180deg, rgb(5 7 12 / 0.7) 0%, rgb(5 7 12 / 0.42) 34%, rgb(5 7 12 / 0.9) 100%),
+      linear-gradient(90deg, rgb(5 7 12 / 0.5), rgb(5 7 12 / 0.5));
+  }
+}
+
+/* ==========================================================================
+   Movimiento reducido: sin póster animado ni entradas
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    transform: none;
+  }
+
+  .hero__etiqueta,
+  .hero__titulo,
+  .hero__entrada,
+  .hero__acciones,
+  .hero__linea,
+  .hero__desliza {
+    animation: none;
+  }
+
+  .hero__cursor {
+    animation: none;
+    opacity: 0.6;
+  }
+}

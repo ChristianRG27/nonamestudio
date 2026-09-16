@@ -1,0 +1,41 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">Proyectos</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <p class="kicker">Proyectos</p>
+      <h1>Menos escaparate. Más casos que expliquen qué cambió.</h1>
+      <p class="pagina__entrada">
+        Un proyecto solo merece mostrarse si cuenta algo útil: qué problema existía, qué decisión tomamos y qué
+        pasó después. Hasta que tengamos casos reales documentados, no rellenaremos esta página con adornos.
+      </p>
+    </header>
+
+    <div class="proyectos__panel">
+      <p class="proyectos__etiqueta">Próximamente: casos reales, con contexto.</p>
+      <p class="proyectos__texto">{{ textoBloque }}</p>
+      <p class="proyectos__nota">
+        Logotipos: solo se publicarán con permiso explícito de cada marca.
+      </p>
+    </div>
+
+    <div class="proyectos__principios">
+      @for (principio of principios; track principio.titulo) {
+        <article class="tarjeta">
+          <h2 class="proyectos__principio-titulo">{{ principio.titulo }}</h2>
+          <p>{{ principio.texto }}</p>
+        </article>
+      }
+    </div>
+
+    <div class="pagina__cierre">
+      <p>¿Tienes un problema interesante que resolver? Puede que el próximo caso sea el tuyo.</p>
+      <a class="boton boton--primario" routerLink="/contacto">Contarnos el proyecto</a>
+    </div>
+  </div>
+</section>

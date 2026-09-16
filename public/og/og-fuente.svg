@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Nómada Studio, diseño y desarrollo web en Jerez de la Frontera">
+  <rect width="1200" height="630" fill="#14110d" />
+
+  <g stroke="#f7f4ef" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 160H1200M0 320H1200M0 480H1200M200 0V630M400 0V630M600 0V630M800 0V630M1000 0V630" />
+  </g>
+
+  <rect x="80" y="88" width="56" height="6" fill="#b83a0c" />
+
+  <text x="80" y="216" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="600" fill="#f7f4ef">Nómada Studio</text>
+
+  <text x="80" y="292" font-family="Inter, Segoe UI, system-ui, Arial, sans-serif" font-size="30" fill="#d8cfc0">
+    Diseño y desarrollo web en Jerez.
+  </text>
+  <text x="80" y="336" font-family="Inter, Segoe UI, system-ui, Arial, sans-serif" font-size="24" fill="#a89e8d">
+    Webs, tiendas online, CRM y automatización con IA.
+  </text>
+
+  <g font-family="Inter, Segoe UI, system-ui, Arial, sans-serif" font-size="20" fill="#a89e8d">
+    <text x="80" y="540">Jerez de la Frontera, Cádiz</text>
+  </g>
+
+  <g fill="none" stroke="#b83a0c" stroke-width="2">
+    <path d="M900 500h200" stroke-opacity="0.5" />
+  </g>
+  <circle cx="900" cy="500" r="10" fill="#b83a0c" />
+  <circle cx="1000" cy="500" r="10" fill="none" stroke="#b83a0c" stroke-width="2" />
+  <circle cx="1100" cy="500" r="10" fill="none" stroke="#b83a0c" stroke-width="2" />
+  <circle cx="1100" cy="500" r="3.5" fill="#b83a0c" />
+</svg>

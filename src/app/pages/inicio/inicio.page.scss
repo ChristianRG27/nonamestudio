@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+/* El contenido posterior al hero se pinta por encima: la cortina que tapa el
+   hero fijo (position: sticky) al hacer scroll. */
+
+.tras-hero {
+  position: relative;
+  z-index: 1;
+  background: var(--papel);
+}

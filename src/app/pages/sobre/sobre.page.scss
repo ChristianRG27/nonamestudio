@@ -1,0 +1,72 @@
+.sobre__principios {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+
+  h2 {
+    font-size: var(--paso-3);
+  }
+}
+
+.sobre__rejilla {
+  display: grid;
+  gap: 1.25rem;
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.sobre__principio-titulo {
+  font-size: var(--paso-1);
+}
+
+.sobre__ficha {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-m);
+  background: var(--papel-100);
+
+  h2 {
+    font-size: var(--paso-2);
+  }
+}
+
+.sobre__ficha-nota {
+  max-width: 60ch;
+  color: var(--tinta-700);
+  font-size: 0.9375rem;
+}
+
+.sobre__datos {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.sobre__dato {
+  display: grid;
+  gap: 0.125rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radio-s);
+  background: var(--papel-0);
+
+  dt {
+    color: var(--tinta-500);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    word-break: break-word;
+  }
+}

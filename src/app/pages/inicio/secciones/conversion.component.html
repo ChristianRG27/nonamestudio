@@ -1,0 +1,20 @@
+<section class="seccion seccion--lavado conversion">
+  <div class="contenedor conversion__rejilla">
+    <div class="conversion__texto" appRevelar>
+      <p class="kicker">El siguiente paso</p>
+      <h2>Cuéntanos qué te está frenando.</h2>
+      <p class="seccion__entrada">
+        Puede ser una web que ya no representa a tu negocio, contactos que se pierden, una tienda difícil de
+        gestionar o demasiado trabajo repetitivo. Cuéntanos el punto de partida; te diremos si podemos ayudarte
+        y por dónde empezaríamos.
+      </p>
+      <app-contacto-directo />
+    </div>
+
+    <div class="conversion__formulario" appRevelar>
+      <span class="senal" aria-hidden="true"></span>
+      <h3 class="conversion__formulario-titulo">Empezar una conversación</h3>
+      <app-formulario-contacto [origen]="'la home'" />
+    </div>
+  </div>
+</section>

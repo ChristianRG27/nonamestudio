@@ -1,0 +1,229 @@
+.ia {
+  position: relative;
+}
+
+.ia__rejilla {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* ==========================================================================
+   Lista de escenarios: raíl de progreso, números grandes y un único punto
+   activo que se despliega.
+   ========================================================================== */
+
+.ia__bloque {
+  position: relative;
+  padding-top: clamp(1rem, 2.5svh, 1.5rem);
+  border-top: 1px solid rgb(247 244 239 / 0.16);
+}
+
+.ia__bloque::before {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 4.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--acento), transparent);
+  content: '';
+}
+
+.ia__etiqueta {
+  margin-bottom: clamp(0.5rem, 1.5svh, 1rem);
+  color: var(--papel-100);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ia__escenarios {
+  position: relative;
+  display: grid;
+  margin: 0;
+  padding: 0 0 0 clamp(1.5rem, 4vw, 2.25rem);
+  list-style: none;
+}
+
+.ia__escenarios::before,
+.ia__escenarios::after {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  content: '';
+}
+
+.ia__escenarios::before {
+  background: rgb(247 244 239 / 0.14);
+}
+
+.ia__escenarios::after {
+  background: linear-gradient(180deg, var(--acento), var(--acento-suave));
+  transform: scaleY(clamp(0, var(--avance-ia, 1), 1));
+  transform-origin: top center;
+}
+
+.escenario {
+  --p: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.375rem 1.25rem;
+  align-items: baseline;
+  padding-block: clamp(0.875rem, 2.4svh, 1.5rem);
+  border-bottom: 1px solid rgb(247 244 239 / 0.1);
+}
+
+.escenario:last-child {
+  border-bottom: 0;
+}
+
+.escenario__numero {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--acento-suave);
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.5rem, 4svh, 2.25rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1;
+  opacity: calc(0.35 + var(--p) * 0.65);
+}
+
+.escenario__titulo {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--papel);
+  font-size: var(--paso-1);
+  opacity: calc(0.5 + var(--p) * 0.5);
+}
+
+.escenario__marca {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: calc(3px * (1 - var(--p)) + 50% * var(--p));
+  background: var(--acento-suave);
+  opacity: var(--p);
+  rotate: calc((1 - var(--p)) * -135deg);
+}
+
+.escenario__cuerpo {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  max-height: calc(var(--p) * 6rem);
+  overflow: hidden;
+  opacity: var(--p);
+  translate: 0 calc((1 - var(--p)) * -0.375rem);
+}
+
+.escenario__texto {
+  max-width: 52ch;
+  color: var(--papel-100);
+  font-size: clamp(0.875rem, 1.9svh, 0.9375rem);
+}
+
+.escenario:hover .escenario__titulo {
+  color: var(--acento-suave);
+}
+
+.ia__nota {
+  max-width: 60rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--acento-suave);
+  background: rgb(247 244 239 / 0.06);
+  color: var(--papel);
+  font-size: 0.9375rem;
+}
+
+.ia__acciones {
+  margin-top: 1.75rem;
+}
+
+/* ==========================================================================
+   Escritorio: la sección se queda parada y el punto activo avanza con el
+   scroll (--avance-ia: 0 → 1). Cada escenario se abre en su tramo y se
+   repliega al entrar el siguiente.
+   ========================================================================== */
+
+@media (min-width: 64em) and (prefers-reduced-motion: no-preference) {
+  :host(.ia--fijado) {
+    .ia {
+      height: 280svh;
+      padding-block: 0;
+    }
+
+    .ia__fijo {
+      position: sticky;
+      top: 0;
+      display: flex;
+      align-items: center;
+      min-height: 100svh;
+      padding-block: calc(var(--altura-cabecera) + clamp(0.75rem, 2.5svh, 2rem)) clamp(1rem, 3svh, 2rem);
+    }
+
+    .ia__rejilla {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      grid-template-areas:
+        'cabecera bloque'
+        'nota bloque'
+        'acciones bloque';
+      column-gap: clamp(2rem, 5vw, 4.5rem);
+      row-gap: 1.25rem;
+      align-content: center;
+    }
+
+    .ia__rejilla > .seccion__cabecera {
+      grid-area: cabecera;
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .ia__rejilla > .ia__bloque {
+      grid-area: bloque;
+      align-self: center;
+    }
+
+    .ia__rejilla > .ia__nota {
+      grid-area: nota;
+      max-width: none;
+    }
+
+    .ia__rejilla > .ia__acciones {
+      grid-area: acciones;
+      margin-top: 0;
+      justify-self: start;
+    }
+
+    .escenario {
+      --p: min(
+        clamp(0, calc((var(--avance-ia, 1) - var(--inicio, 0)) / 0.06), 1),
+        clamp(0, calc((var(--fin, 1.2) - var(--avance-ia, 1)) / 0.06), 1)
+      );
+    }
+
+    .escenario:nth-child(1) {
+      --inicio: -0.06;
+      --fin: 0.28;
+    }
+
+    .escenario:nth-child(2) {
+      --inicio: 0.22;
+      --fin: 0.53;
+    }
+
+    .escenario:nth-child(3) {
+      --inicio: 0.47;
+      --fin: 0.78;
+    }
+
+    .escenario:nth-child(4) {
+      --inicio: 0.72;
+      --fin: 1.2;
+    }
+  }
+}

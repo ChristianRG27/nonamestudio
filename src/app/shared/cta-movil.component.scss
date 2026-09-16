@@ -1,0 +1,33 @@
+.cta-movil {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(0.875rem + env(safe-area-inset-bottom, 0px));
+  left: 1rem;
+  z-index: 35;
+  display: none;
+  animation: cta-entrar 280ms ease both;
+}
+
+.cta-movil .boton {
+  width: 100%;
+  justify-content: center;
+  box-shadow: var(--sombra-l);
+}
+
+@keyframes cta-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 47.99em) {
+  .cta-movil {
+    display: block;
+  }
+}

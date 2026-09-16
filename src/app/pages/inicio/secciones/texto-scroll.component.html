@@ -1,0 +1,11 @@
+<section #seccion class="texto-scroll">
+  <div class="texto-scroll__lienzo">
+    <div class="contenedor">
+      <h2 class="texto-scroll__titulo">
+        @for (palabra of palabras(); track $index) {
+          <span #palabra class="texto-scroll__palabra">{{ palabra }}</span>{{ ' ' }}
+        }
+      </h2>
+    </div>
+  </div>
+</section>

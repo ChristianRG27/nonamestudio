@@ -1,0 +1,705 @@
+/* ==========================================================================
+   Tokens de diseño
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --tinta-950: #14110d;
+  --tinta-900: #1e1a15;
+  --tinta-700: #3d372f;
+  --tinta-500: #675f54;
+  --tinta-300: #98907f;
+
+  --noche-950: #05070c;
+  --noche-900: #0a0e16;
+  --noche-800: #101827;
+
+  --papel-0: #fffdfa;
+  --papel: #f7f4ef;
+  --papel-100: #efeadf;
+
+  --linea: #ddd5c7;
+  --linea-fuerte: #b7ab99;
+
+  --acento: #b83a0c;
+  --acento-fuerte: #8f2d08;
+  --acento-suave: #ff9b73;
+  --acento-lavado: #fbe9de;
+
+  --exito: #2f6d4f;
+  --error: #b3261e;
+  --error-texto: #9c1a12;
+
+  --sombra-m: 0 1px 2px rgb(20 17 13 / 0.05), 0 10px 28px rgb(20 17 13 / 0.07);
+  --sombra-l: 0 2px 8px rgb(20 17 13 / 0.07), 0 26px 64px rgb(20 17 13 / 0.14);
+
+  --radio-s: 8px;
+  --radio-m: 14px;
+  --radio-l: 20px;
+
+  /* Fuentes: sistema local, sin bloqueo de renderizado.
+     Si se autoalojan Fraunces e Inter, declarar @font-face con font-display: swap. */
+  --fuente-titulos: 'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --fuente-texto: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  --paso--1: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --paso-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --paso-1: clamp(1.1875rem, 1.12rem + 0.35vw, 1.375rem);
+  --paso-2: clamp(1.4375rem, 1.28rem + 0.8vw, 1.875rem);
+  --paso-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
+  --paso-4: clamp(2.125rem, 1.55rem + 2.9vw, 3.75rem);
+  --paso-5: clamp(2.5rem, 1.7rem + 4vw, 4.75rem);
+
+  --contenedor: 75rem;
+  --canal: clamp(1.125rem, 4vw, 3rem);
+  --altura-cabecera: 5.25rem;
+  --seccion-y: clamp(3.5rem, 9vw, 7.5rem);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--altura-cabecera) + 0.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta-950);
+  font-family: var(--fuente-texto);
+  font-size: var(--paso-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--paso-5);
+}
+
+h2 {
+  font-size: var(--paso-4);
+}
+
+h3 {
+  font-size: var(--paso-2);
+}
+
+h4 {
+  font-size: var(--paso-1);
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--acento);
+  color: var(--papel-0);
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.seccion--oscura :focus-visible {
+  outline-color: var(--acento-suave);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Desplazamiento suave (Lenis)
+   ========================================================================== */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Transición entre páginas (View Transitions API)
+   --------------------------------------------------------------------------
+   Las reglas de animación viven en un <style> de index.html porque el
+   minificador del build descarta los pseudo-elementos ::view-transition-*.
+   Aquí solo se declara qué elementos se capturan aparte para no viajar con
+   la página (cabecera, CTA móvil y aviso de cookies).
+   ========================================================================== */
+
+/* El nombre de transición de la cabecera se aplica solo mientras dura el
+   cambio de página: si estuviera siempre activo crearía un «backdrop root»
+   y dejaría de verse el vidrio (desenfoque y distorsión) del header. */
+html.transicionando app-cabecera {
+  view-transition-name: cabecera-fija;
+}
+
+app-cta-movil {
+  view-transition-name: cta-fijo;
+}
+
+app-banner-cookies {
+  view-transition-name: cookies-fijo;
+}
+
+/* ==========================================================================
+   Utilidades
+   ========================================================================== */
+
+.contenedor {
+  width: min(100% - (var(--canal) * 2), var(--contenedor));
+  margin-inline: auto;
+}
+
+.contenedor--estrecho {
+  width: min(100% - (var(--canal) * 2), 48rem);
+  margin-inline: auto;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.saltar-contenido {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.125rem;
+  border-radius: var(--radio-s);
+  background: var(--tinta-950);
+  color: var(--papel-0);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.saltar-contenido:focus-visible {
+  transform: translateY(0);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--acento);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kicker::before {
+  width: 1.75rem;
+  height: 2px;
+  background: currentColor;
+  content: '';
+}
+
+.seccion--oscura .kicker {
+  color: var(--acento-suave);
+}
+
+.seccion--noche .kicker {
+  color: var(--acento-suave);
+}
+
+.seccion {
+  padding-block: var(--seccion-y);
+}
+
+.seccion--oscura {
+  background: var(--noche-900);
+  color: var(--papel);
+}
+
+.seccion--noche {
+  background: var(--noche-950);
+  color: var(--papel);
+}
+
+.seccion--lavado {
+  background: var(--papel-100);
+}
+
+.seccion__cabecera {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.seccion__entrada {
+  color: var(--tinta-700);
+  font-size: var(--paso-1);
+}
+
+.seccion--oscura .seccion__entrada {
+  color: var(--papel-100);
+}
+
+.seccion--noche .seccion__entrada {
+  color: var(--papel-100);
+}
+
+/* ==========================================================================
+   Revelado progresivo de escenas
+   --------------------------------------------------------------------------
+   La clase «con-revelado» la añade un script mínimo en index.html; sin
+   JavaScript el contenido permanece visible. El retardo se controla con
+   «--revelar-retardo» y lo aplica la directiva appRevelar.
+   ========================================================================== */
+
+html.con-revelado .revelar {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+html.con-revelado .revelar.revelado {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 560ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--revelar-retardo, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.con-revelado .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html.menu-abierto {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Botones y enlaces de acción
+   ========================================================================== */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.375rem;
+  border: 1px solid transparent;
+  border-radius: var(--radio-s);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.boton:active {
+  transform: translateY(1px);
+}
+
+.boton:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.boton--primario {
+  background: var(--acento);
+  color: var(--papel-0);
+}
+
+.boton--primario:hover {
+  background: var(--acento-fuerte);
+}
+
+.boton--secundario {
+  border-color: var(--tinta-300);
+  background: transparent;
+  color: var(--tinta-950);
+}
+
+.boton--secundario:hover {
+  border-color: var(--tinta-950);
+  background: var(--papel-100);
+}
+
+.seccion--oscura .boton--secundario {
+  border-color: var(--tinta-300);
+  color: var(--papel);
+}
+
+.seccion--oscura .boton--secundario:hover {
+  border-color: var(--papel);
+  background: var(--tinta-900);
+}
+
+.boton--contorno-claro {
+  border-color: rgb(247 244 239 / 0.45);
+  background: rgb(5 7 12 / 0.35);
+  color: var(--papel);
+}
+
+.boton--contorno-claro:hover {
+  border-color: var(--papel);
+  background: rgb(247 244 239 / 0.12);
+}
+
+.enlace-flecha {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--acento);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.enlace-flecha::after {
+  content: '→';
+  transition: transform 0.15s ease;
+}
+
+.enlace-flecha:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.enlace-flecha:hover::after {
+  transform: translateX(3px);
+}
+
+.seccion--oscura .enlace-flecha {
+  color: var(--acento-suave);
+}
+
+/* ==========================================================================
+   Tarjetas y prosa
+   ========================================================================== */
+
+.tarjeta {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: clamp(1.375rem, 3vw, 1.875rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-m);
+  background: var(--papel-0);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta:hover {
+  border-color: rgb(184 58 12 / 0.4);
+  box-shadow: var(--sombra-m);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Efectos modernos compartidos
+   ========================================================================== */
+
+/* Foco de luz que sigue al puntero (requiere TarjetaInteractivaDirective). */
+.con-brillo {
+  position: relative;
+}
+
+.con-brillo::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    15rem circle at var(--punto-x, 50%) var(--punto-y, 0%),
+    rgb(184 58 12 / 0.1),
+    transparent 62%
+  );
+  opacity: 0;
+  content: '';
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.con-brillo:hover::after,
+.con-brillo:focus-within::after {
+  opacity: 1;
+}
+
+.seccion--oscura .con-brillo::after,
+.seccion--noche .con-brillo::after {
+  background: radial-gradient(
+    15rem circle at var(--punto-x, 50%) var(--punto-y, 0%),
+    rgb(255 155 115 / 0.16),
+    transparent 62%
+  );
+}
+
+/* Señal de luz que recorre el borde superior de un bloque. */
+.senal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--acento-suave), transparent);
+  opacity: 0;
+  pointer-events: none;
+  animation: senal-barrido 6.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes senal-barrido {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  60% {
+    opacity: 0.9;
+    transform: translateX(233%);
+  }
+
+  61%,
+  100% {
+    opacity: 0;
+    transform: translateX(233%);
+  }
+}
+
+/* Barrido de luz en botones principales. */
+.boton--primario {
+  position: relative;
+  overflow: hidden;
+}
+
+.boton--primario::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.26), transparent);
+  content: '';
+  pointer-events: none;
+  transform: skewX(-12deg);
+  transition: transform 520ms ease;
+}
+
+.boton--primario:hover::after,
+.boton--primario:focus-visible::after {
+  transform: translateX(320%) skewX(-12deg);
+}
+
+/* La línea del kicker crece al revelarse la escena. */
+html.con-revelado .revelar .kicker::before {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 640ms cubic-bezier(0.22, 0.61, 0.36, 1) 140ms;
+}
+
+html.con-revelado .revelar.revelado .kicker::before {
+  transform: scaleX(1);
+}
+
+.prosa {
+  display: grid;
+  gap: 1.125rem;
+  max-width: 68ch;
+}
+
+.prosa h2 {
+  margin-top: 1.5rem;
+  font-size: var(--paso-3);
+}
+
+.prosa h3 {
+  margin-top: 1rem;
+  font-size: var(--paso-1);
+}
+
+.prosa ul,
+.prosa ol {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.prosa a {
+  color: var(--acento);
+}
+
+.prosa--aviso {
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--linea-fuerte);
+  border-left: 4px solid var(--acento);
+  border-radius: var(--radio-s);
+  background: var(--acento-lavado);
+  font-size: 0.9375rem;
+}
+
+/* ==========================================================================
+   Páginas interiores
+   ========================================================================== */
+
+.pagina {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem) var(--seccion-y);
+}
+
+.migas {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.migas__lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  color: var(--tinta-500);
+  font-size: 0.875rem;
+  list-style: none;
+
+  li:not(:last-child)::after {
+    margin-left: 0.5rem;
+    content: '/';
+  }
+}
+
+.migas__enlace {
+  color: var(--tinta-700);
+  text-decoration: none;
+}
+
+.migas__enlace:hover {
+  color: var(--acento);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.pagina__cabecera {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.pagina__entrada {
+  color: var(--tinta-700);
+  font-size: var(--paso-1);
+}
+
+.pagina__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.pagina__cierre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-m);
+  background: var(--papel-0);
+}
+
+.pagina__cierre p {
+  max-width: 46ch;
+  color: var(--tinta-700);
+}

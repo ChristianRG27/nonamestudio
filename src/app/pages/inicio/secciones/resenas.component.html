@@ -1,0 +1,51 @@
+<section class="resenas">
+  <div class="contenedor resenas__cabecera" appRevelar>
+    <p class="kicker">Reseñas de Google</p>
+    <h2 class="resenas__titular">Todos los clientes están contentos y lo dicen en Google.</h2>
+    @if (disponible(valoracion)) {
+      <p class="resenas__valoracion">{{ valoracion }}</p>
+    }
+    @if (disponible(fichaGoogle)) {
+      <a
+        class="boton boton--secundario"
+        [href]="fichaGoogle"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Leer las reseñas en Google
+      </a>
+    } @else {
+      <p class="resenas__pendiente">
+        Ficha de Google: {{ valoracion }} · pega aquí la URL real de tus reseñas
+      </p>
+    }
+  </div>
+
+  <div class="resenas__marquesina">
+    @for (fila of filas; track fila; let indiceFila = $index) {
+      <div class="resenas__fila" [class.resenas__fila--reversa]="indiceFila === 1">
+        @for (copia of [0, 1]; track copia; let indiceCopia = $index) {
+          <ul class="resenas__lista" [attr.aria-hidden]="indiceCopia === 1 ? 'true' : null">
+            @for (resena of fila; track resena) {
+              <li class="resenas__item">
+                <article class="resena" [class.resena--pendiente]="resena.estrellas === 0">
+                  @if (resena.estrellas > 0) {
+                    <p class="resena__estrellas" [attr.aria-label]="resena.estrellas + ' de 5 estrellas'">
+                      <span aria-hidden="true">{{ '★★★★★'.slice(0, resena.estrellas) }}</span>
+                    </p>
+                  }
+                  <p class="resena__texto">{{ resena.texto }}</p>
+                  <footer class="resena__pie">
+                    <span class="resena__autor">{{ resena.autor }}</span>
+                    <span class="resena__servicio">{{ resena.servicio }}</span>
+                    <span class="resena__origen">Google</span>
+                  </footer>
+                </article>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+  </div>
+</section>

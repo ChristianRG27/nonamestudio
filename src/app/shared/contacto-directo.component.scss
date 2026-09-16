@@ -1,0 +1,21 @@
+.directo {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.directo__titulo {
+  font-weight: 600;
+}
+
+.directo__lista {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.directo__pendiente,
+.directo__horario {
+  color: var(--tinta-500);
+  font-size: 0.9375rem;
+}

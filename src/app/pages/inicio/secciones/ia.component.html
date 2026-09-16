@@ -1,0 +1,39 @@
+<section class="seccion seccion--oscura ia">
+  <div class="ia__fijo">
+    <div class="contenedor ia__rejilla">
+      <div class="seccion__cabecera" appRevelar>
+        <p class="kicker">IA que sirve para algo</p>
+        <h2>Menos promesas sobre IA. Más trabajo resuelto.</h2>
+        <p class="seccion__entrada">
+          Antes de automatizar, entendemos qué tarea se repite, qué información necesita y dónde debe
+          intervenir una persona. Después diseñamos una solución que tu equipo pueda entender, supervisar y
+          mejorar.
+        </p>
+      </div>
+
+      <div class="ia__bloque">
+        <p class="ia__etiqueta" appRevelar>Así puede ayudarte</p>
+        <ol class="ia__escenarios">
+          @for (escenario of escenarios; track escenario.titulo; let indice = $index) {
+            <li class="escenario" [appRevelar]="indice * 80">
+              <span class="escenario__numero" aria-hidden="true">{{ ('0' + (indice + 1)).slice(-2) }}</span>
+              <h3 class="escenario__titulo">{{ escenario.titulo }}</h3>
+              <span class="escenario__marca" aria-hidden="true"></span>
+              <div class="escenario__cuerpo">
+                <p class="escenario__texto">{{ escenario.descripcion }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <p class="ia__nota" appRevelar>{{ nota }}</p>
+
+      <div class="ia__acciones" appRevelar>
+        <a class="boton boton--primario" routerLink="/servicios/ia-automatizacion">
+          Ver soluciones de IA y automatización
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
