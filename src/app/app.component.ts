@@ -7,13 +7,14 @@ import { AnalyticsService } from './core/analytics.service';
 import { ScrollSuaveService } from './core/scroll-suave.service';
 import { BannerCookiesComponent } from './shared/banner-cookies.component';
 import { CabeceraComponent } from './shared/cabecera.component';
+import { ChatbotComponent } from './shared/chatbot.component';
 import { CtaMovilComponent } from './shared/cta-movil.component';
 import { PieComponent } from './shared/pie.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CabeceraComponent, PieComponent, BannerCookiesComponent, CtaMovilComponent],
+  imports: [RouterOutlet, CabeceraComponent, PieComponent, BannerCookiesComponent, CtaMovilComponent, ChatbotComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

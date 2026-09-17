@@ -1,0 +1,82 @@
+@if (consentimiento.cargado() && consentimiento.estado() !== 'pendiente') {
+  <div class="chatbot">
+    @if (!abierto()) {
+      <button #lanzador class="chatbot__lanzador" type="button" (click)="abrir()" aria-haspopup="dialog" data-evento="chatbot_open">
+        <span class="chatbot__simbolo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5" /></svg></span>
+        <span>¿Tienes una idea?<small>Hablemos de ella</small></span>
+        <span class="chatbot__flecha" aria-hidden="true">↗</span>
+      </button>
+    } @else {
+      <section id="chatbot-panel" class="chatbot__panel" role="dialog" aria-modal="false" aria-labelledby="chatbot-nombre" data-lenis-prevent>
+        <header class="chatbot__cabecera">
+          <span class="chatbot__sello" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5" /></svg></span>
+          <div class="chatbot__identidad">
+            <h2 id="chatbot-nombre">Nómada Studio</h2>
+            <p>Tu próximo proyecto empieza aquí</p>
+          </div>
+          <button class="chatbot__cerrar" type="button" (click)="cerrar()" aria-label="Cerrar asistente">×</button>
+        </header>
+        <div class="chatbot__progreso" aria-label="Progreso de la consulta">
+          @for (etapa of ['Tu idea', 'Los detalles', 'Hablemos']; track etapa; let i = $index) {
+            <span [class.completado]="numeroPaso() > i" [attr.aria-current]="numeroPaso() === i + 1 ? 'step' : null"><i aria-hidden="true"></i>{{ etapa }}</span>
+          }
+        </div>
+        <div class="chatbot__contenido" [class.chatbot__contenido--atras]="direccion() === 'atras'">
+          @for (vista of [paso()]; track vista) {
+            <div class="chatbot__paso">
+              @if (vista === 'servicio') {
+                <span class="chatbot__eyebrow">DE UNA IDEA A ALGO REAL</span>
+                <h3 #titulo tabindex="-1" class="chatbot__pregunta">¿Qué tienes<br>en mente?</h3>
+                <p class="chatbot__intro">Elige por dónde empezamos. Te ayudamos a dar el siguiente paso.</p>
+                <div class="chatbot__opciones">
+                  @for (opcion of opciones; track opcion.titulo; let i = $index) {
+                    <button type="button" class="chatbot__opcion" [style.--orden]="i" (click)="elegir(opcion.titulo)">
+                      <span class="chatbot__icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="opcion.icono" /></svg></span>
+                      <span class="chatbot__opcion-texto"><strong>{{ opcion.titulo }}</strong><small>{{ opcion.detalle }}</small></span>
+                      <span class="chatbot__flecha" aria-hidden="true">↗</span>
+                    </button>
+                  }
+                </div>
+              } @else if (vista === 'detalle') {
+                <span class="chatbot__seleccion">{{ servicio() }}</span>
+                <h3 #titulo tabindex="-1" class="chatbot__pregunta">Dale un poco<br>de contexto.</h3>
+                <p class="chatbot__intro">No necesitas tenerlo todo claro. Con una frase podemos empezar.</p>
+                <div class="chatbot__campo">
+                  <label for="chatbot-detalle">¿Qué te gustaría conseguir? <span>Opcional</span></label>
+                  <textarea id="chatbot-detalle" class="chatbot__detalle" rows="4" maxlength="500" [value]="detalle()" (input)="actualizarDetalle($event)" [placeholder]="ejemplo()" aria-describedby="chatbot-contador"></textarea>
+                  <span id="chatbot-contador" class="chatbot__contador">{{ detalle().length }} / 500</span>
+                </div>
+                <button type="button" class="chatbot__principal" (click)="continuar()">{{ detalle().trim() ? 'Ya lo tengo, seguimos' : 'Prefiero contároslo después' }} <span aria-hidden="true">→</span></button>
+                <button type="button" class="chatbot__secundario" (click)="volver()">← Elegir otra idea</button>
+              } @else {
+                <span class="chatbot__eyebrow">EL SIGUIENTE PASO ES HABLAR</span>
+                <h3 #titulo tabindex="-1" class="chatbot__pregunta">Tu idea merece<br>una conversación.</h3>
+                <p class="chatbot__intro">Elige cómo seguimos. Te dejamos el mensaje preparado.</p>
+                <div class="chatbot__resumen">
+                  <span>VAMOS A HABLAR DE</span>
+                  <strong>{{ servicio() }}</strong>
+                  @if (detalle().trim()) { <p>{{ detalle().trim() }}</p> }
+                </div>
+                @if (whatsappDisponible) {
+                  <a class="chatbot__principal" [href]="enlaceWhatsapp()" target="_blank" rel="noopener noreferrer" data-evento="whatsapp_click">Hablemos por WhatsApp <span aria-hidden="true">↗</span></a>
+                }
+                @if (emailDisponible) {
+                  <a class="chatbot__correo" [href]="enlaceEmail()" data-evento="chatbot_email_click">Prefiero escribir un correo <span aria-hidden="true">↗</span></a>
+                }
+                @if (!whatsappDisponible && !emailDisponible) {
+                  <a class="chatbot__principal" routerLink="/contacto" (click)="cerrar()">Ver cómo contactar <span aria-hidden="true">→</span></a>
+                }
+                <p class="chatbot__nota">Tú decides cuándo enviarlo. Podrás revisar y editar el mensaje antes.</p>
+                <div class="chatbot__navegacion">
+                  <button type="button" class="chatbot__secundario" (click)="volver()">← Editar mi idea</button>
+                  <button type="button" class="chatbot__secundario" (click)="reiniciar()">Empezar de nuevo</button>
+                </div>
+              }
+            </div>
+          }
+        </div>
+        <footer class="chatbot__pie"><span aria-hidden="true">✳</span> Buenas ideas. Conversaciones sencillas.</footer>
+      </section>
+    }
+  </div>
+}

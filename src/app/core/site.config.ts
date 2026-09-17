@@ -16,9 +16,9 @@ export const SITE = {
   marca: 'Nómada Studio',
   razonSocial: '[RAZÓN SOCIAL PENDIENTE]',
   dominio: 'https://www.nomadastudio.es',
-  email: PENDIENTE,
+  email: 'test@test.com',
   telefono: PENDIENTE,
-  whatsapp: PENDIENTE,
+  whatsapp: '+34 000000000',
   direccion: DIRECCION_PENDIENTE,
   ciudad: 'Jerez de la Frontera',
   provincia: 'Cádiz',
@@ -484,6 +484,8 @@ export const EVENTOS_CONVERSION: EventoConversion[] = [
   { nombre: 'contact_form_submit', descripcion: 'Envío correcto del formulario de contacto.' },
   { nombre: 'phone_click', descripcion: 'Clic en un número de teléfono.' },
   { nombre: 'whatsapp_click', descripcion: 'Clic en un enlace de WhatsApp.' },
+  { nombre: 'chatbot_open', descripcion: 'Apertura del asistente de contacto.' },
+  { nombre: 'chatbot_email_click', descripcion: 'Clic en el correo del asistente de contacto.' },
   { nombre: 'meeting_book', descripcion: 'Clic para reservar una reunión.' },
 ];
 
