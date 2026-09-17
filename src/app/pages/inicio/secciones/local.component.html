@@ -1,0 +1,33 @@
+<section class="seccion local">
+  <div class="contenedor local__rejilla">
+    <div class="local__texto" appRevelar>
+      <p class="kicker">Cerca, cuando importa</p>
+      <h2>De Jerez para negocios que no quieren quedarse quietos.</h2>
+      <p class="seccion__entrada">
+        Tenemos base en Jerez de la Frontera y entendemos el día a día de quienes viven de atender, vender,
+        reservar y cumplir plazos. Podemos sentarnos contigo o trabajar a distancia: lo importante es que el
+        proyecto avance.
+      </p>
+      <!--
+        Pendiente para el lanzamiento: enlazar aquí a «Diseño web en Cádiz» y «Proyectos en la provincia»
+        cuando existan páginas y casos realmente diferenciados. No crear enlaces vacíos.
+      -->
+      <ul class="local__lista">
+        @for (punto of puntos; track punto) {
+          <li>{{ punto }}</li>
+        }
+      </ul>
+    </div>
+
+    <figure class="local__ficha con-brillo" appRevelar appTarjetaInteractiva>
+      <p class="local__coordenadas">
+        <span class="local__pulso" aria-hidden="true"></span>
+        36.685° N · 6.126° O
+      </p>
+      <figcaption class="local__ciudad">
+        {{ ciudad }}
+        <span class="local__provincia">{{ provincia }}</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>

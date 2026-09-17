@@ -1,0 +1,65 @@
+:host {
+  display: block;
+}
+
+/* ==========================================================================
+   Texto que se pinta con el scroll
+   --------------------------------------------------------------------------
+   La sección reserva altura y el lienzo queda fijado; el recorrido de scroll
+   define el progreso con el que cada palabra pasa del gris claro al oscuro.
+   ========================================================================== */
+
+.texto-scroll {
+  --texto-scroll-inicio: #d5d5d5;
+  --texto-scroll-final: #171717;
+
+  position: relative;
+  height: 160vh;
+  background: var(--papel-100);
+}
+
+.texto-scroll__lienzo {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--altura-cabecera) + 1.5rem) calc(var(--altura-cabecera) * 0.75);
+}
+
+.texto-scroll__titulo {
+  --tam-texto-scroll: clamp(1.75rem, min(0.9rem + 4.2vw, 7.5svh), 4.5rem);
+
+  font-size: var(--tam-texto-scroll);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.texto-scroll__palabra {
+  color: var(--texto-scroll-inicio);
+}
+
+@media (min-width: 48em) {
+  .texto-scroll {
+    height: 180vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .texto-scroll {
+    height: auto;
+    padding-block: var(--seccion-y);
+  }
+
+  .texto-scroll__lienzo {
+    position: static;
+    min-height: 0;
+    padding-block: 0;
+  }
+
+  .texto-scroll__palabra {
+    color: var(--texto-scroll-final);
+  }
+}

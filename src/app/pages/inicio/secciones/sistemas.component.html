@@ -1,0 +1,48 @@
+<section class="seccion seccion--noche sistemas">
+  <div class="sistemas__ambiente" aria-hidden="true">
+    <span class="sistemas__brillo sistemas__brillo--a" appParallax="20"></span>
+    <span class="sistemas__brillo sistemas__brillo--b" appParallax="30"></span>
+  </div>
+
+  <div class="contenedor">
+    <div class="seccion__cabecera" appRevelar>
+      <p class="kicker">Lo que ocurre cuando las piezas encajan</p>
+      <h2>No hacemos pantallas sueltas. Diseñamos sistemas que se entienden entre sí.</h2>
+      <p class="seccion__entrada">
+        Una web puede ser solo el escaparate o el punto de partida de algo más útil: reservas que llegan
+        ordenadas, una tienda conectada con la operación, contactos que no se pierden y tareas que dejan de
+        repetirse.
+      </p>
+    </div>
+
+    <ul class="sistemas__rejilla">
+      @for (pieza of piezas; track pieza.titulo; let indice = $index) {
+        <li
+          class="sistemas__pieza"
+          [appRevelar]="indice * 90"
+          [style.--columna]="pieza.columna"
+          [style.--escala]="pieza.escala"
+          [style.--desplazamiento]="pieza.desplazamiento + 'px'"
+        >
+          <article class="pieza con-brillo" appTarjetaInteractiva="3">
+            <p class="pieza__etiqueta">Concepto</p>
+            <h3 class="pieza__titulo">{{ pieza.titulo }}</h3>
+            <div class="pieza__visual">
+              <app-interfaz-visual [tipo]="pieza.tipo" />
+            </div>
+            <a class="enlace-flecha" [routerLink]="pieza.ruta">Ver {{ pieza.servicio }}</a>
+          </article>
+        </li>
+      }
+    </ul>
+
+    <div class="sistemas__cierre" appRevelar>
+      <p class="sistemas__sello">HECHO PARA FUNCIONAR · HECHO CON NÓMADA</p>
+      <a class="boton boton--primario" routerLink="/proyectos">Ver proyectos y casos</a>
+      <p class="sistemas__nota">
+        Estas piezas son conceptos de producto. Los casos de clientes se publicarán únicamente con su
+        autorización.
+      </p>
+    </div>
+  </div>
+</section>

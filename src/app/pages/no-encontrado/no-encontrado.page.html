@@ -1,0 +1,17 @@
+<section class="pagina no-encontrado">
+  <div class="contenedor contenedor--estrecho">
+    <p class="kicker">Error 404</p>
+    <h1>Aquí no hay nada. Pero podemos llevarte a donde sí.</h1>
+    <p class="no-encontrado__texto">
+      Puede que el enlace haya cambiado, esté mal escrito o que esta página todavía no exista. Elige por dónde
+      seguir.
+    </p>
+    <ul class="no-encontrado__enlaces">
+      @for (enlace of enlaces; track enlace.ruta) {
+        <li>
+          <a class="boton boton--secundario" [routerLink]="enlace.ruta">{{ enlace.etiqueta }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

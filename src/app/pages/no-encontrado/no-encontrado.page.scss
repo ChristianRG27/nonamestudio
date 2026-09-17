@@ -1,0 +1,23 @@
+.no-encontrado {
+  display: grid;
+  gap: 1.25rem;
+
+  h1 {
+    font-size: var(--paso-4);
+  }
+}
+
+.no-encontrado__texto {
+  max-width: 52ch;
+  color: var(--tinta-700);
+  font-size: var(--paso-1);
+}
+
+.no-encontrado__enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
+}

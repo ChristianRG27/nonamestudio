@@ -1,0 +1,35 @@
+.recursos__lista {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    display: grid;
+  }
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.recurso {
+  gap: 0.75rem;
+}
+
+.recurso__estado {
+  color: var(--acento);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.recurso__titulo {
+  font-size: var(--paso-1);
+}
+
+.recurso__texto {
+  color: var(--tinta-700);
+}

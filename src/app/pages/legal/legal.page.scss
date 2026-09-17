@@ -1,0 +1,13 @@
+.legal__bloque {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.legal__bloque h2 {
+  margin-top: 1rem;
+  font-size: var(--paso-2);
+}
+
+.legal__reiniciar {
+  margin-top: 1.5rem;
+}

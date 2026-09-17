@@ -1,0 +1,139 @@
+<header class="cabecera" [class.cabecera--oscuro]="tonoOscuro() || menuAbierto()">
+  <div class="contenedor cabecera__fila">
+    <a class="marca" routerLink="/" (click)="cerrarMenu()" [attr.aria-label]="marca + ', inicio'">
+      <span class="marca__marca" aria-hidden="true"></span>
+      <span class="marca__texto">{{ marca }}</span>
+    </a>
+
+    <nav class="navegacion" aria-label="Navegación principal">
+      <ul class="navegacion__lista">
+        <li class="navegacion__item navegacion__item--con-hijos">
+          <a
+            class="navegacion__enlace"
+            routerLink="/servicios"
+            routerLinkActive="navegacion__enlace--activo"
+          >
+            Servicios
+            <span class="navegacion__flecha" aria-hidden="true"></span>
+          </a>
+          <div class="submenu">
+            <ul class="submenu__lista">
+              @for (servicio of servicios; track servicio.ruta) {
+                <li>
+                  <a class="submenu__enlace" [routerLink]="servicio.ruta">
+                    <span class="submenu__titulo">{{ servicio.etiqueta }}</span>
+                    <span class="submenu__descripcion">{{ servicio.descripcion }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+        </li>
+
+        @for (enlace of enlacesEscritorio; track enlace.ruta) {
+          <li class="navegacion__item">
+            <a class="navegacion__enlace" [routerLink]="enlace.ruta" routerLinkActive="navegacion__enlace--activo">
+              {{ enlace.etiqueta }}
+            </a>
+          </li>
+        }
+
+        <li class="navegacion__item navegacion__item--con-hijos">
+          <a class="navegacion__enlace" routerLink="/sobre" routerLinkActive="navegacion__enlace--activo">
+            Estudio
+            <span class="navegacion__flecha" aria-hidden="true"></span>
+          </a>
+          <div class="submenu submenu--derecha">
+            <ul class="submenu__lista">
+              @for (enlace of estudio; track enlace.ruta) {
+                <li>
+                  <a class="submenu__enlace" [routerLink]="enlace.ruta">
+                    <span class="submenu__titulo">{{ enlace.etiqueta }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <a class="boton cabecera__cta" routerLink="/contacto">Hablemos de tu proyecto</a>
+
+    <button
+      #botonMenu
+      class="cabecera__boton-menu"
+      type="button"
+      [attr.aria-expanded]="menuAbierto()"
+      aria-controls="menu-movil"
+      (click)="alternarMenu()"
+    >
+      <span class="visualmente-oculto">{{ menuAbierto() ? 'Cerrar menú' : 'Abrir menú' }}</span>
+      <span class="cabecera__lineas" aria-hidden="true" [class.cabecera__lineas--abierto]="menuAbierto()"></span>
+    </button>
+
+    <span
+      class="cabecera__progreso"
+      aria-hidden="true"
+      [style.transform]="'scaleX(' + progreso() + ')'"
+    ></span>
+    <span class="cabecera__brillo" aria-hidden="true"></span>
+  </div>
+
+  <!-- Distorsión del fondo tras la cápsula (mejora progresiva). -->
+  <svg class="cabecera__filtro" aria-hidden="true" focusable="false" width="0" height="0">
+    <filter id="distorsion-cabecera" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.006 0.011"
+        numOctaves="2"
+        seed="7"
+        result="ruido"
+      />
+      <feGaussianBlur in="ruido" stdDeviation="1.8" result="suave" />
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="suave"
+        scale="24"
+        xChannelSelector="R"
+        yChannelSelector="G"
+      />
+    </filter>
+  </svg>
+
+  <div
+    #panel
+    class="menu"
+    id="menu-movil"
+    data-lenis-prevent
+    [class.menu--abierto]="menuAbierto()"
+    [attr.inert]="menuAbierto() ? null : ''"
+    (keydown)="alPulsarTab($event)"
+  >
+    <nav class="menu__interior contenedor" aria-label="Menú">
+      <ul class="menu__lista">
+        @for (enlace of enlacesMenu; track enlace.ruta) {
+          <li>
+            <a class="menu__enlace" [routerLink]="enlace.ruta" (click)="cerrarMenu()">
+              {{ enlace.etiqueta }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <ul class="menu__sublista">
+        @for (enlace of estudio; track enlace.ruta) {
+          <li>
+            <a class="menu__subenlace" [routerLink]="enlace.ruta" (click)="cerrarMenu()">
+              {{ enlace.etiqueta }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <a class="boton boton--primario menu__cta" routerLink="/contacto" (click)="cerrarMenu()">
+        Hablemos de tu proyecto
+      </a>
+    </nav>
+  </div>
+</header>

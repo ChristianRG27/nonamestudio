@@ -1,0 +1,157 @@
+<form class="formulario" [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+  <div class="formulario__rejilla">
+    <div class="campo">
+      <label class="campo__etiqueta" for="contacto-nombre">Tu nombre <span aria-hidden="true">*</span></label>
+      <input
+        id="contacto-nombre"
+        class="campo__control"
+        type="text"
+        formControlName="nombre"
+        autocomplete="name"
+        required
+        [attr.aria-invalid]="invalido('nombre') ? 'true' : null"
+        [attr.aria-describedby]="invalido('nombre') ? 'error-nombre' : null"
+      />
+      @if (invalido('nombre')) {
+        <p class="campo__error" id="error-nombre">Escribe tu nombre para saber cómo dirigirnos a ti.</p>
+      }
+    </div>
+
+    <div class="campo">
+      <label class="campo__etiqueta" for="contacto-empresa">Empresa o proyecto <span aria-hidden="true">*</span></label>
+      <input
+        id="contacto-empresa"
+        class="campo__control"
+        type="text"
+        formControlName="empresa"
+        autocomplete="organization"
+        required
+        [attr.aria-invalid]="invalido('empresa') ? 'true' : null"
+        [attr.aria-describedby]="invalido('empresa') ? 'error-empresa' : null"
+      />
+      @if (invalido('empresa')) {
+        <p class="campo__error" id="error-empresa">Indica el nombre de tu empresa o proyecto.</p>
+      }
+    </div>
+
+    <div class="campo">
+      <label class="campo__etiqueta" for="contacto-email">Tu email <span aria-hidden="true">*</span></label>
+      <input
+        id="contacto-email"
+        class="campo__control"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        required
+        [attr.aria-invalid]="invalido('email') ? 'true' : null"
+        [attr.aria-describedby]="invalido('email') ? 'error-email' : null"
+      />
+      @if (invalido('email')) {
+        <p class="campo__error" id="error-email">Revisa el email: parece que falta algo.</p>
+      }
+    </div>
+
+    <div class="campo">
+      <label class="campo__etiqueta" for="contacto-telefono">Teléfono, si prefieres que te llamemos</label>
+      <input
+        id="contacto-telefono"
+        class="campo__control"
+        type="tel"
+        formControlName="telefono"
+        autocomplete="tel"
+        [attr.aria-invalid]="invalido('telefono') ? 'true' : null"
+        [attr.aria-describedby]="invalido('telefono') ? 'error-telefono' : null"
+      />
+      @if (invalido('telefono')) {
+        <p class="campo__error" id="error-telefono">Revisa el número de teléfono.</p>
+      }
+    </div>
+
+    <div class="campo campo--ancho">
+      <label class="campo__etiqueta" for="contacto-mensaje">¿Qué te gustaría mejorar? <span aria-hidden="true">*</span></label>
+      <textarea
+        id="contacto-mensaje"
+        class="campo__control"
+        rows="5"
+        formControlName="mensaje"
+        aria-describedby="ayuda-mensaje"
+        required
+        [attr.aria-invalid]="invalido('mensaje') ? 'true' : null"
+      ></textarea>
+      <p class="campo__ayuda" id="ayuda-mensaje">
+        Cuéntanos qué está pasando ahora y qué te gustaría que cambiara. No hace falta que tengas la solución
+        pensada.
+      </p>
+      @if (invalido('mensaje')) {
+        <p class="campo__error">Cuéntanos al menos un poco qué necesitas.</p>
+      }
+    </div>
+
+    <div class="campo campo--ancho">
+      <label class="campo__etiqueta" for="contacto-presupuesto">Presupuesto aproximado, si lo tienes</label>
+      <input
+        id="contacto-presupuesto"
+        class="campo__control"
+        type="text"
+        formControlName="presupuesto"
+        aria-describedby="ayuda-presupuesto"
+      />
+      <p class="campo__ayuda" id="ayuda-presupuesto">
+        Puedes indicarnos un rango o decirnos que todavía no lo tienes claro.
+      </p>
+    </div>
+  </div>
+
+  <div class="campo campo--check">
+    <input
+      id="contacto-privacidad"
+      class="campo__check"
+      type="checkbox"
+      formControlName="privacidad"
+      required
+      [attr.aria-invalid]="invalido('privacidad') ? 'true' : null"
+      [attr.aria-describedby]="invalido('privacidad') ? 'error-privacidad' : null"
+    />
+    <label class="campo__check-etiqueta" for="contacto-privacidad">
+      Acepto que {{ marca }} use mis datos para responder a esta consulta.
+    </label>
+  </div>
+  @if (invalido('privacidad')) {
+    <p class="campo__error" id="error-privacidad">
+      Necesitamos tu consentimiento para poder responderte.
+    </p>
+  }
+
+  <div class="formulario__acciones">
+    <button class="boton boton--primario boton--ancho-movil" type="submit" [disabled]="estado() === 'enviando'">
+      @if (estado() === 'enviando') {
+        Enviando tu mensaje…
+      } @else {
+        Enviar consulta
+      }
+    </button>
+  </div>
+
+  <p class="formulario__legal">
+    Usaremos estos datos solo para responderte. Consulta nuestra
+    <a routerLink="/privacidad">Política de privacidad</a>.
+  </p>
+
+  @if (estado() === 'ok') {
+    <p class="formulario__estado formulario__estado--ok" role="status">
+      Recibido. Te responderemos en {{ plazo }}.
+    </p>
+  }
+  @if (estado() === 'mailto') {
+    <p class="formulario__estado" role="status">
+      Tu mensaje está listo en el correo. Envíalo y te responderemos en {{ plazo }}.
+    </p>
+  }
+  @if (estado() === 'error') {
+    <p class="formulario__estado formulario__estado--error" role="alert">
+      No hemos podido enviarlo ahora. Prueba de nuevo en unos minutos@if (!emailPendiente) {
+        , o escríbenos directamente a <a [href]="'mailto:' + emailContacto">{{ emailContacto }}</a>
+      }.
+    </p>
+  }
+</form>

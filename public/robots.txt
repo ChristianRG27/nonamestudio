@@ -1,0 +1,5 @@
+# Sustituir www.nomadastudio.es por el dominio real antes de publicar.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.nomadastudio.es/sitemap.xml

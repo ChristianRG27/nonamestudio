@@ -1,0 +1,24 @@
+<section class="seccion faq">
+  <div class="contenedor">
+    <div class="faq__rejilla">
+      <div class="faq__cabecera" appRevelar>
+        <p class="kicker">Dudas razonables</p>
+        <h2>Antes de empezar, hablemos claro.</h2>
+      </div>
+
+      <div class="faq__lista" appRevelar>
+        @for (faq of preguntas; track faq.pregunta) {
+          <details class="pregunta">
+            <summary class="pregunta__resumen">
+              <span class="pregunta__texto">{{ faq.pregunta }}</span>
+              <span class="pregunta__icono" aria-hidden="true"></span>
+            </summary>
+            <div class="pregunta__respuesta">
+              <p>{{ faq.respuesta }}</p>
+            </div>
+          </details>
+        }
+      </div>
+    </div>
+  </div>
+</section>

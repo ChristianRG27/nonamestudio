@@ -1,0 +1,35 @@
+.servicios__rejilla {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    display: grid;
+  }
+
+  @media (min-width: 40em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 64em) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.servicio {
+  gap: 1rem;
+}
+
+.servicio__titulo {
+  font-size: var(--paso-1);
+}
+
+.servicio__texto {
+  color: var(--tinta-700);
+}
+
+.servicio__enlace {
+  margin-top: auto;
+}

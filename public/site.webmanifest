@@ -1,0 +1,21 @@
+{
+  "name": "Nómada Studio",
+  "short_name": "Nómada Studio",
+  "description": "Diseño y desarrollo web, tiendas online, CRM y automatización con IA en Jerez de la Frontera.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ef",
+  "theme_color": "#f7f4ef",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

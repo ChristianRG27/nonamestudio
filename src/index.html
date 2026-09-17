@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nómada Studio | Diseño web, software e IA en Jerez</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      PENDIENTE ANTES DE PUBLICAR
+      · Completar los campos marcados como [DATO PENDIENTE] en src/app/core/site.config.ts
+      · Confirmar www.nomadastudio.es como dominio canónico (canonical, OG, JSON-LD y sitemap)
+    -->
+
+    <link rel="canonical" href="https://www.nomadastudio.es/" />
+    <meta
+      name="description"
+      content="Webs, tiendas, CRM e IA para negocios de Jerez y Cádiz. Capta mejor, ordena el trabajo y deja de perder oportunidades."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#05070c" />
+
+    <script>
+      document.documentElement.classList.add('con-revelado');
+    </script>
+
+    <!-- Transición entre páginas (View Transitions API). Va aquí porque el
+         minificador del build descarta los pseudo-elementos ::view-transition-*. -->
+    <style>
+      @media (prefers-reduced-motion: no-preference) {
+        ::view-transition-old(root) {
+          animation: pagina-salir 520ms cubic-bezier(0.4, 0, 1, 1) both !important;
+          mix-blend-mode: normal !important;
+          opacity: 1 !important;
+        }
+
+        ::view-transition-new(root) {
+          animation: pagina-entrar 520ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+          mix-blend-mode: normal !important;
+          opacity: 1 !important;
+        }
+
+        html.nav-atras::view-transition-old(root) {
+          animation: pagina-salir-atras 520ms cubic-bezier(0.4, 0, 1, 1) both !important;
+          mix-blend-mode: normal !important;
+          opacity: 1 !important;
+        }
+
+        html.nav-atras::view-transition-new(root) {
+          animation: pagina-entrar-atras 520ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+          mix-blend-mode: normal !important;
+          opacity: 1 !important;
+        }
+      }
+
+      /* Las dos capas se comportan como páginas opacas, sin mezcla aditiva. */
+      ::view-transition-image-pair(root) {
+        isolation: isolate !important;
+      }
+
+      ::view-transition-group(cabecera-fija),
+      ::view-transition-group(cta-fijo),
+      ::view-transition-group(cookies-fijo) {
+        mix-blend-mode: normal !important;
+        animation: none !important;
+      }
+
+      @keyframes pagina-salir {
+        to {
+          transform: translateX(-16%);
+        }
+      }
+
+      @keyframes pagina-entrar {
+        from {
+          transform: translateX(100%);
+        }
+      }
+
+      @keyframes pagina-salir-atras {
+        to {
+          transform: translateX(16%);
+        }
+      }
+
+      @keyframes pagina-entrar-atras {
+        from {
+          transform: translateX(-100%);
+        }
+      }
+
+      ::view-transition-group(cabecera-fija),
+      ::view-transition-group(cta-fijo),
+      ::view-transition-group(cookies-fijo),
+      ::view-transition-old(cabecera-fija),
+      ::view-transition-old(cta-fijo),
+      ::view-transition-old(cookies-fijo) {
+        animation: none;
+      }
+
+      ::view-transition-new(cabecera-fija),
+      ::view-transition-new(cta-fijo),
+      ::view-transition-new(cookies-fijo) {
+        animation: none;
+        opacity: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-group(*),
+        ::view-transition-old(*),
+        ::view-transition-new(*) {
+          animation: none !important;
+        }
+      }
+    </style>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nómada Studio" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Nómada Studio | Diseño web, software e IA en Jerez" />
+    <meta
+      property="og:description"
+      content="Webs, tiendas, CRM e IA para negocios de Jerez y Cádiz. Capta mejor, ordena el trabajo y deja de perder oportunidades."
+    />
+    <meta property="og:url" content="https://www.nomadastudio.es/" />
+    <meta property="og:image" content="https://www.nomadastudio.es/og/og-nomada-studio.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nómada Studio, diseño y desarrollo web en Jerez de la Frontera" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nómada Studio | Diseño web, software e IA en Jerez" />
+    <meta
+      name="twitter:description"
+      content="Webs, tiendas, CRM e IA para negocios de Jerez y Cádiz."
+    />
+    <meta name="twitter:image" content="https://www.nomadastudio.es/og/og-nomada-studio.jpg" />
+
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      href="/img/hero-ambiente-960.avif"
+      imagesrcset="/img/hero-ambiente-960.avif 960w, /img/hero-ambiente-1600.avif 1600w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://www.nomadastudio.es/#organizacion",
+        "name": "Nómada Studio",
+        "url": "https://www.nomadastudio.es/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.nomadastudio.es/icon-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://www.nomadastudio.es/og/og-nomada-studio.jpg",
+        "description": "Estudio digital con base en Jerez de la Frontera: diseño y desarrollo web, tiendas online, CRM y automatización con IA.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jerez de la Frontera",
+          "addressRegion": "Cádiz",
+          "addressCountry": "ES"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Jerez de la Frontera" },
+          { "@type": "AdministrativeArea", "name": "Provincia de Cádiz" }
+        ],
+        "knowsAbout": [
+          "Diseño web",
+          "Desarrollo web",
+          "Tiendas online",
+          "Landing pages",
+          "Cartas digitales",
+          "CRM",
+          "Aplicaciones web",
+          "Automatización",
+          "Inteligencia artificial aplicada",
+          "SEO técnico"
+        ]
+      }
+    </script>
+
+    <!--
+      Añadir en este bloque cuando sean datos reales:
+      "email", "telephone", "sameAs" (perfiles oficiales),
+      "address.streetAddress" + "address.postalCode", "geo", "openingHours".
+      No incluir AggregateRating ni Review sin reseñas reales publicadas.
+    -->
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.nomadastudio.es/#website",
+        "url": "https://www.nomadastudio.es/",
+        "name": "Nómada Studio",
+        "inLanguage": "es-ES",
+        "publisher": { "@id": "https://www.nomadastudio.es/#organizacion" }
+      }
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

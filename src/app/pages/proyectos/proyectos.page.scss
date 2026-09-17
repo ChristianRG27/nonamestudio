@@ -1,0 +1,42 @@
+.proyectos__panel {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border: 1px dashed var(--linea-fuerte);
+  border-radius: var(--radio-l);
+  background: var(--papel-0);
+}
+
+.proyectos__etiqueta {
+  color: var(--acento);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proyectos__texto {
+  max-width: 60ch;
+  color: var(--tinta-700);
+  font-size: var(--paso-1);
+}
+
+
+.proyectos__nota {
+  color: var(--tinta-500);
+  font-size: 0.875rem;
+}
+
+.proyectos__principios {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.proyectos__principio-titulo {
+  font-size: var(--paso-1);
+}

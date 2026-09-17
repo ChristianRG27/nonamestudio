@@ -1,0 +1,16 @@
+@if (consentimiento.cargado() && consentimiento.estado() === 'pendiente') {
+  <div class="cookies" role="region" aria-label="Aviso sobre cookies y analítica">
+    <div class="cookies__texto">
+      <p>
+        Usamos solo lo imprescindible para que la web funcione. Si aceptas la analítica, nos ayudas a entender
+        qué te interesa y a mejorar la experiencia. No vendemos tus datos ni activamos estas herramientas hasta
+        que tú lo decidas.
+      </p>
+      <p class="cookies__enlace"><a routerLink="/cookies">Política de cookies</a></p>
+    </div>
+    <div class="cookies__acciones">
+      <button class="boton boton--primario" type="button" (click)="aceptar()">Aceptar analítica</button>
+      <button class="boton boton--secundario" type="button" (click)="rechazar()">Solo lo imprescindible</button>
+    </div>
+  </div>
+}

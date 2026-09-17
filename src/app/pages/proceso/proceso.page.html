@@ -1,0 +1,45 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">Proceso</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <p class="kicker">Proceso</p>
+      <h1>Un proyecto bien llevado no deja dudas en el camino.</h1>
+      <p class="pagina__entrada">
+        Sabrás qué vamos a trabajar, qué necesitamos de ti y qué recibirás en cada etapa. Sin fases inventadas
+        ni entregas que aparecen al final.
+      </p>
+    </header>
+
+    <ol class="fases">
+      @for (paso of pasos; track paso.numero) {
+        <li class="fase">
+          <div class="fase__cabecera">
+            <span class="fase__numero" aria-hidden="true">{{ paso.numero }}</span>
+            <h2 class="fase__titulo">{{ paso.titulo }}</h2>
+            <p class="fase__resumen">{{ paso.resumen }}</p>
+          </div>
+          <div class="fase__cuerpo">
+            <p class="fase__detalle">{{ paso.detalle }}</p>
+            <h3 class="fase__subtitulo">Qué te llevas</h3>
+            <ul class="fase__entregables">
+              @for (entregable of paso.entregables; track entregable) {
+                <li>{{ entregable }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ol>
+
+    <div class="pagina__cierre">
+      <p>Antes de empezar recibirás alcance, calendario y responsabilidades claros.</p>
+      <a class="boton boton--primario" routerLink="/contacto">Hablar de mi proyecto</a>
+    </div>
+  </div>
+</section>

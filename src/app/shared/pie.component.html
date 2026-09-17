@@ -1,0 +1,88 @@
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__rejilla">
+      <div class="pie__bloque">
+        <a class="pie__marca" routerLink="/">
+          <span class="marca__marca" aria-hidden="true"></span>
+          <span>{{ marca }}</span>
+        </a>
+        <p class="pie__claim">Web, software e IA para negocios que quieren funcionar mejor.</p>
+        @if (disponible(direccion)) {
+          <p class="pie__dato">{{ direccion }}</p>
+        }
+        <p class="pie__dato">
+          Con base en {{ ciudad }}. Trabajamos donde esté tu negocio.@if (googleMaps) {
+            <a [href]="googleMaps" rel="noopener noreferrer" target="_blank">Cómo llegar</a>
+          }
+        </p>
+      </div>
+
+      <nav class="pie__bloque" aria-label="Servicios">
+        <h2 class="pie__titulo">Servicios</h2>
+        <ul class="pie__lista">
+          @for (servicio of servicios; track servicio.slug) {
+            <li>
+              <a class="pie__enlace" [routerLink]="['/servicios', servicio.slug]">{{ servicio.nombre }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <nav class="pie__bloque" aria-label="Estudio">
+        <h2 class="pie__titulo">Estudio</h2>
+        <ul class="pie__lista">
+          @for (enlace of estudio; track enlace.ruta) {
+            <li>
+              <a class="pie__enlace" [routerLink]="enlace.ruta">{{ enlace.etiqueta }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <div class="pie__bloque">
+        <h2 class="pie__titulo">Contacto</h2>
+        <ul class="pie__lista">
+          @if (disponible(email)) {
+            <li><a class="pie__enlace" [href]="'mailto:' + email">{{ email }}</a></li>
+          } @else {
+            <li class="pie__pendiente">Email: {{ email }}</li>
+          }
+          @if (disponible(telefono)) {
+            <li><a class="pie__enlace" [href]="enlaceTelefono" data-evento="phone_click">{{ telefono }}</a></li>
+          } @else {
+            <li class="pie__pendiente">Teléfono: {{ telefono }}</li>
+          }
+          @if (disponible(whatsapp)) {
+            <li>
+              <a class="pie__enlace" [href]="enlaceWhatsapp" rel="noopener noreferrer" target="_blank" data-evento="whatsapp_click">
+                WhatsApp
+              </a>
+            </li>
+          }
+          @if (disponible(horario)) {
+            <li class="pie__dato">{{ horario }}</li>
+          }
+        </ul>
+        @if (redes.length > 0) {
+          <ul class="pie__redes">
+            @for (red of redes; track red.url) {
+              <li>
+                <a class="pie__enlace" [href]="red.url" rel="noopener noreferrer" target="_blank">{{ red.nombre }}</a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p>&copy; {{ marca }} · {{ ciudad }}</p>
+      <ul class="pie__legal-lista">
+        <li><a class="pie__enlace" routerLink="/aviso-legal">Aviso legal</a></li>
+        <li><a class="pie__enlace" routerLink="/privacidad">Privacidad</a></li>
+        <li><a class="pie__enlace" routerLink="/cookies">Cookies</a></li>
+        <li><a class="pie__enlace" routerLink="/accesibilidad">Accesibilidad</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

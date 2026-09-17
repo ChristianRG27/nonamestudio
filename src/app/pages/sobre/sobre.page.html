@@ -1,0 +1,58 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">Sobre {{ marca }}</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <p class="kicker">Sobre {{ marca }}</p>
+      <h1>Tecnología que se explica. Trabajo que se nota.</h1>
+      <p class="pagina__entrada">
+        {{ marca }} nace para una idea muy concreta: tu negocio no necesita más herramientas si no se entienden
+        entre sí. Diseñamos webs, tiendas, procesos internos y automatizaciones para que la parte digital te
+        ayude a avanzar, no te dé más trabajo.
+      </p>
+      <p class="pagina__entrada">
+        Tenemos base en Jerez de la Frontera y trabajamos con negocios de Cádiz y de cualquier lugar cuando el
+        proyecto encaja. No presumimos de cifras, premios ni experiencias que no podamos demostrar. Preferimos
+        que hable el trabajo.
+      </p>
+    </header>
+
+    <section class="sobre__principios" aria-labelledby="titulo-principios">
+      <h2 id="titulo-principios">Cómo trabajamos</h2>
+      <div class="sobre__rejilla">
+        @for (principio of principios; track principio.titulo) {
+          <article class="tarjeta">
+            <h3 class="sobre__principio-titulo">{{ principio.titulo }}</h3>
+            <p>{{ principio.texto }}</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="sobre__ficha" aria-labelledby="titulo-ficha">
+      <h2 id="titulo-ficha">Ficha del estudio</h2>
+      <p class="sobre__ficha-nota">
+        Estos campos se completan con datos reales antes de publicar. Si ves una etiqueta pendiente, es porque
+        todavía no está confirmada.
+      </p>
+      <dl class="sobre__datos">
+        @for (dato of ficha; track dato.etiqueta) {
+          <div class="sobre__dato">
+            <dt>{{ dato.etiqueta }}</dt>
+            <dd>{{ dato.valor }}</dd>
+          </div>
+        }
+      </dl>
+    </section>
+
+    <div class="pagina__cierre">
+      <p>Si esta forma de trabajar te encaja, cuéntanos qué quieres mejorar.</p>
+      <a class="boton boton--primario" routerLink="/contacto">Hablemos de tu proyecto</a>
+    </div>
+  </div>
+</section>

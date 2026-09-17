@@ -1,0 +1,125 @@
+.local__rejilla {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  align-items: center;
+
+  @media (min-width: 64em) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+}
+
+.local__texto {
+  display: grid;
+  gap: 1rem;
+  max-width: 42rem;
+}
+
+.local__lista {
+  display: grid;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--tinta-700);
+  }
+
+  li::before {
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 1px;
+    background: var(--acento);
+    content: '';
+  }
+}
+
+.local__ficha {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.5rem, 4vw, 2.25rem) clamp(1.5rem, 4vw, 2.25rem)
+    calc(clamp(1.5rem, 4vw, 2.25rem) + 0.5rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-m);
+  background:
+    repeating-linear-gradient(
+      to right,
+      transparent 0 2.5rem,
+      rgb(20 17 13 / 0.045) 2.5rem 2.5625rem
+    ),
+    var(--papel-0);
+}
+
+.local__ficha::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  border-radius: var(--radio-m) 0 0 var(--radio-m);
+  background: linear-gradient(180deg, var(--acento), rgb(184 58 12 / 0.25));
+  content: '';
+  transform-origin: top center;
+}
+
+html.con-revelado .local__ficha.revelar::before {
+  transform: scaleY(0);
+}
+
+html.con-revelado .local__ficha.revelar.revelado::before {
+  transform: scaleY(1);
+  transition: transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: 180ms;
+}
+
+.local__coordenadas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--tinta-500);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+}
+
+.local__pulso {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--acento);
+  animation: local-pulso 2.6s ease-out infinite;
+}
+
+@keyframes local-pulso {
+  0% {
+    box-shadow: 0 0 0 0 rgb(184 58 12 / 0.4);
+  }
+
+  70%,
+  100% {
+    box-shadow: 0 0 0 0.5rem rgb(184 58 12 / 0);
+  }
+}
+
+.local__ciudad {
+  font-family: var(--fuente-titulos);
+  font-size: var(--paso-2);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.local__provincia {
+  display: block;
+  color: var(--tinta-500);
+  font-family: var(--fuente-texto);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

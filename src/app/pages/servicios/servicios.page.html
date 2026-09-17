@@ -1,0 +1,40 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">Servicios</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <p class="kicker">Servicios</p>
+      <h1>Soluciones para que tu negocio avance sin añadir más caos.</h1>
+      <p class="pagina__entrada">
+        No todo el mundo necesita una aplicación a medida. Ni toda web necesita IA. Empezamos por entender qué
+        quieres conseguir y te proponemos la combinación que tenga sentido para tu negocio, tu equipo y tu
+        momento.
+      </p>
+    </header>
+
+    <ul class="servicios__rejilla">
+      @for (servicio of servicios; track servicio.slug) {
+        <li>
+          <article class="tarjeta servicio">
+            <app-icono-servicio [nombre]="servicio.icono" />
+            <h2 class="servicio__titulo">{{ servicio.tituloTarjeta }}</h2>
+            <p class="servicio__texto">{{ servicio.beneficio }}</p>
+            <a class="enlace-flecha servicio__enlace" [routerLink]="['/servicios', servicio.slug]">
+              Ver {{ servicio.enlace }}
+            </a>
+          </article>
+        </li>
+      }
+    </ul>
+
+    <div class="pagina__cierre">
+      <p>¿Tu caso no cabe en una tarjeta? Mejor. Cuéntanoslo y pensamos contigo la forma más útil de abordarlo.</p>
+      <a class="boton boton--primario" routerLink="/contacto">Hablar de mi proyecto</a>
+    </div>
+  </div>
+</section>

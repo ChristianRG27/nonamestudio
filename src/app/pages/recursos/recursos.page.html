@@ -1,0 +1,36 @@
+<section class="pagina">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <ol class="migas__lista">
+        <li><a class="migas__enlace" routerLink="/">Inicio</a></li>
+        <li aria-current="page">Recursos</li>
+      </ol>
+    </nav>
+
+    <header class="pagina__cabecera">
+      <p class="kicker">Recursos</p>
+      <h1>Guías para decidir mejor antes de invertir.</h1>
+      <p class="pagina__entrada">
+        No queremos llenar un blog por llenar. Publicaremos recursos que te ayuden a hacer mejores preguntas,
+        evitar errores caros y entender qué necesita realmente tu negocio.
+      </p>
+    </header>
+
+    <ul class="recursos__lista">
+      @for (recurso of enPreparacion; track recurso.titulo) {
+        <li>
+          <article class="tarjeta recurso">
+            <p class="recurso__estado">En preparación</p>
+            <h2 class="recurso__titulo">{{ recurso.titulo }}</h2>
+            <p class="recurso__texto">{{ recurso.descripcion }}</p>
+          </article>
+        </li>
+      }
+    </ul>
+
+    <div class="pagina__cierre">
+      <p>¿Hay una duda que te está frenando ahora mismo? Pregúntanosla.</p>
+      <a class="boton boton--primario" routerLink="/contacto">Hacer una consulta</a>
+    </div>
+  </div>
+</section>

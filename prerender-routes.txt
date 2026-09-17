@@ -1,0 +1,6 @@
+/servicios/diseno-web-corporativo
+/servicios/landing-pages
+/servicios/tiendas-online
+/servicios/restauracion-turismo
+/servicios/crm-aplicaciones-web
+/servicios/ia-automatizacion
